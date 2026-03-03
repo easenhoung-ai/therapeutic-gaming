@@ -258,85 +258,100 @@ input:focus,select:focus{ border-color: #c7ccff; box-shadow: 0 0 0 4px rgba(154,
 }
 
 /* =========================
-   Floating leaf decorations
-   Paste near the BOTTOM of styles.css
+   Brushy floating leaves (more, with veins) + soft brush strokes
+   Replace your previous leaf snippet with this one
    ========================= */
 
 :root{
-  --leaf-opacity: .18;        /* try .12 to .28 */
-  --leaf-blur: 0px;           /* try 1px if you want softer */
-  --leaf-saturation: 1.0;     /* try 1.05 for a little pop */
+  --leaf-opacity: .22;     /* .18–.30 */
+  --leaf-blur: 0.4px;      /* 0–1.2px */
 }
 
-/* One leaf SVG (rounded, soft silhouette) */
-@supports (background: url("data:image/svg+xml,%3Csvg%20/%3E")) {
-  body{
-    position: relative; /* needed for layering */
-  }
+body{ position: relative; }
 
-  body::before{
-    content:"";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
+/* Layer 1: many small/medium brush leaves */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: var(--leaf-opacity);
+  filter: blur(var(--leaf-blur)) saturate(1.05);
 
-    opacity: var(--leaf-opacity);
-    filter: blur(var(--leaf-blur)) saturate(var(--leaf-saturation));
+  background-repeat: no-repeat;
 
-    /* Scatter multiple leaves using background-images */
-    background-repeat: no-repeat;
-    background-image:
-      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M18%2046c10-8%2020-18%2028-30'%20stroke='%236ea86e'%20stroke-width='3'%20stroke-linecap='round'%20fill='none'%20opacity='.55'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23f7b0c8'/%3E%3Cpath%20d='M18%2046c10-8%2020-18%2028-30'%20stroke='%23e58aac'%20stroke-width='3'%20stroke-linecap='round'%20fill='none'%20opacity='.55'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23cfe9cf'/%3E%3Cpath%20d='M18%2046c10-8%2020-18%2028-30'%20stroke='%238fbf8f'%20stroke-width='3'%20stroke-linecap='round'%20fill='none'%20opacity='.5'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23ffd9c9'/%3E%3Cpath%20d='M18%2046c10-8%2020-18%2028-30'%20stroke='%23f2b39b'%20stroke-width='3'%20stroke-linecap='round'%20fill='none'%20opacity='.5'/%3E%3C/svg%3E");
+  /* Brushy leaf SVG (rounded, painted edge, extra veins) */
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%236ea86e'%20stroke-width='3.2'%20stroke-linecap='round'%20fill='none'%20opacity='.55'/%3E%3Cpath%20d='M26%2045c2-4%206-8%2011-13'%20stroke='%236ea86e'%20stroke-width='2.4'%20stroke-linecap='round'%20opacity='.4'/%3E%3Cpath%20d='M29%2051c2-4%205-7%209-10'%20stroke='%236ea86e'%20stroke-width='2.2'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M21%2038c2-3%207-7%2014-13'%20stroke='%236ea86e'%20stroke-width='2.2'%20stroke-linecap='round'%20opacity='.3'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23f7b0c8'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%23e58aac'%20stroke-width='3.2'%20stroke-linecap='round'%20fill='none'%20opacity='.55'/%3E%3Cpath%20d='M26%2045c2-4%206-8%2011-13'%20stroke='%23e58aac'%20stroke-width='2.4'%20stroke-linecap='round'%20opacity='.4'/%3E%3Cpath%20d='M29%2051c2-4%205-7%209-10'%20stroke='%23e58aac'%20stroke-width='2.2'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M21%2038c2-3%207-7%2014-13'%20stroke='%23e58aac'%20stroke-width='2.2'%20stroke-linecap='round'%20opacity='.3'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23cfe9cf'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%238fbf8f'%20stroke-width='3.1'%20stroke-linecap='round'%20fill='none'%20opacity='.5'/%3E%3Cpath%20d='M26%2045c2-4%206-8%2011-13'%20stroke='%238fbf8f'%20stroke-width='2.3'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M29%2051c2-4%205-7%209-10'%20stroke='%238fbf8f'%20stroke-width='2.1'%20stroke-linecap='round'%20opacity='.3'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23ffd9c9'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%23f2b39b'%20stroke-width='3.1'%20stroke-linecap='round'%20fill='none'%20opacity='.5'/%3E%3Cpath%20d='M26%2045c2-4%206-8%2011-13'%20stroke='%23f2b39b'%20stroke-width='2.3'%20stroke-linecap='round'%20opacity='.33'/%3E%3Cpath%20d='M29%2051c2-4%205-7%209-10'%20stroke='%23f2b39b'%20stroke-width='2.1'%20stroke-linecap='round'%20opacity='.28'/%3E%3C/svg%3E");
 
-    /* Positions + sizes (tweak freely) */
-    background-position:
-      12% 18%,
-      82% 14%,
-      18% 78%,
-      86% 82%;
-    background-size:
-      110px 110px,
-      140px 140px,
-      120px 120px,
-      160px 160px;
+  /* More leaves: positions */
+  background-position:
+    10% 14%,
+    86% 12%,
+    18% 70%,
+    90% 78%;
+  /* Sizes */
+  background-size:
+    130px 130px,
+    150px 150px,
+    120px 120px,
+    170px 170px;
 
-    /* Gentle drift */
-    animation: leafDrift 12s ease-in-out infinite;
-  }
-
-  /* A second layer: fewer, larger leaves for depth */
-  body::after{
-    content:"";
-    position: fixed;
-    inset: 0;
-    z-index: -3;
-    pointer-events: none;
-    opacity: calc(var(--leaf-opacity) * .7);
-    filter: blur(1px) saturate(1.05);
-
-    background-repeat: no-repeat;
-    background-image:
-      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23e6f4e6'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23f7e6f1'/%3E%3C/svg%3E");
-    background-position: 55% 8%, 40% 92%;
-    background-size: 220px 220px, 260px 260px;
-
-    animation: leafSway 16s ease-in-out infinite;
-  }
-
-  @keyframes leafDrift{
-    0%   { transform: translateY(0px) translateX(0px); }
-    50%  { transform: translateY(-10px) translateX(6px); }
-    100% { transform: translateY(0px) translateX(0px); }
-  }
-
-  @keyframes leafSway{
-    0%   { transform: translateY(0px) translateX(0px); }
-    50%  { transform: translateY(8px) translateX(-8px); }
-    100% { transform: translateY(0px) translateX(0px); }
-  }
+  animation: leafDrift 11s ease-in-out infinite;
 }
+
+/* Layer 2: add MORE leaves with different orientation + optional brush strokes */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  opacity: .16;
+  filter: blur(0.8px) saturate(1.05);
+
+  background-repeat: no-repeat;
+
+  /* A few rotated leaves (same silhouette, rotated via SVG transform) + brush strokes */
+  background-image:
+    /* Rotated matcha leaf */
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cg%20transform='rotate(-25%2032%2032)'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23e6f4e6'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%238fbf8f'%20stroke-width='3'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M24%2042c3-4%207-7%2012-12'%20stroke='%238fbf8f'%20stroke-width='2'%20stroke-linecap='round'%20opacity='.25'/%3E%3C/g%3E%3C/svg%3E"),
+    /* Rotated blush leaf */
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cg%20transform='rotate(18%2032%2032)'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23f7e6f1'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%23e58aac'%20stroke-width='3'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M24%2042c3-4%207-7%2012-12'%20stroke='%23e58aac'%20stroke-width='2'%20stroke-linecap='round'%20opacity='.25'/%3E%3C/g%3E%3C/svg%3E"),
+
+    /* Brush stroke connector 1 */
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20180'%3E%3Cpath%20d='M10%20110%20C70%2020%20150%2020%20290%20130'%20stroke='%238fbf8f'%20stroke-width='16'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.25'/%3E%3Cpath%20d='M10%20110%20C70%2020%20150%2020%20290%20130'%20stroke='%23f7b0c8'%20stroke-width='9'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.18'/%3E%3C/svg%3E"),
+    /* Brush stroke connector 2 */
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20180'%3E%3Cpath%20d='M20%2050%20C120%20160%20190%20140%20280%2070'%20stroke='%23f7b0c8'%20stroke-width='14'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.20'/%3E%3Cpath%20d='M20%2050%20C120%20160%20190%20140%20280%2070'%20stroke='%238fbf8f'%20stroke-width='8'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.16'/%3E%3C/svg%3E");
+
+  background-position:
+    42% 10%,
+    64% 88%,
+    6% 32%,
+    55% 58%;
+
+  background-size:
+    220px 220px,
+    200px 200px,
+    520px 320px,
+    480px 300px;
+
+  animation: leafSway 16s ease-in-out infinite;
+}
+
+@keyframes leafDrift{
+  0%   { transform: translateY(0px) translateX(0px); }
+  50%  { transform: translateY(-12px) translateX(7px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+
+@keyframes leafSway{
+  0%   { transform: translateY(0px) translateX(0px); }
+  50%  { transform: translateY(10px) translateX(-10px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+
