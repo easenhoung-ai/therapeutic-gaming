@@ -258,21 +258,25 @@ input:focus,select:focus{ border-color: #c7ccff; box-shadow: 0 0 0 4px rgba(154,
 }
 
 /* =========================
-   Leaf canopy background (tons of leaves + faint branches)
-   Paste at BOTTOM of styles.css
+   Dense Brush Bush Canopy
+   Multi-layer, offset, connected branches
    ========================= */
 
 :root{
-  --canopy-opacity: .18;      /* .12–.26 */
-  --canopy-opacity-2: .10;    /* .06–.16 */
-  --canopy-scale: 360px;      /* smaller = denser (try 420px) */
-  --canopy-scale-2: 760px;    /* second layer size */
+  --canopyA: 350px;   /* smaller = denser */
+  --canopyB: 650px;
+  --canopyC: 900px;
+
+  --canopyOpacityA: .18;
+  --canopyOpacityB: .12;
+  --canopyOpacityC: .08;
 }
 
-/* IMPORTANT: This assumes you do NOT have any other body::before / body::after decorations */
-body{ position: relative; }
+body{
+  position: relative;
+}
 
-/* Dense repeating leaf layer */
+/* ===== MAIN DENSE LAYER ===== */
 body::before{
   content:"";
   position: fixed;
@@ -280,19 +284,36 @@ body::before{
   z-index: -3;
   pointer-events: none;
 
-  opacity: var(--canopy-opacity);
+  opacity: var(--canopyOpacityA);
   filter: blur(.35px) saturate(1.08);
   mix-blend-mode: multiply;
 
-  background-repeat: repeat;
-  background-size: var(--canopy-scale) var(--canopy-scale);
+  background-repeat: repeat, repeat, repeat;
+  background-size:
+    var(--canopyA) var(--canopyA),
+    var(--canopyB) var(--canopyB),
+    var(--canopyC) var(--canopyC);
 
-  /* Brushy leaf canopy tile with faint branches */
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='520'%20height='520'%20viewBox='0%200%20520%20520'%3E%3Cdefs%3E%3Cfilter%20id='soft'%3E%3CfeGaussianBlur%20stdDeviation='0.35'/%3E%3C/filter%3E%3C/defs%3E%3Crect%20width='520'%20height='520'%20fill='transparent'/%3E%3C!--%20branches%20--%3E%3Cg%20opacity='0.33'%3E%3Cpath%20d='M30%20370%20C130%20260%20220%20270%20320%20340%20C400%20395%20470%20370%20490%20340'%20stroke='%236b8f6b'%20stroke-width='14'%20stroke-linecap='round'%20fill='none'/%3E%3Cpath%20d='M85%20325%20C140%20270%20190%20240%20260%20210'%20stroke='%235b7d5b'%20stroke-width='10'%20stroke-linecap='round'%20fill='none'/%3E%3Cpath%20d='M300%20335%20C360%20310%20410%20270%20460%20220'%20stroke='%235b7d5b'%20stroke-width='10'%20stroke-linecap='round'%20fill='none'/%3E%3C/g%3E%3C!--%20leaf%20stamps%20(matcha/blush/mint)%20--%3E%3Cg%20filter='url(%23soft)'%3E%3Cg%20opacity='0.95'%3E%3Cpath%20d='M120%20110c34-26%2076-18%2098%2012%2026%2036%2016%2078-18%20102-34%2024-76%2012-98-18-26-36-16-78%2018-96z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M245%20140c28-20%2062-14%2080%2010%2022%2030%2012%2064-16%2084-28%2020-62%2010-80-16-22-30-12-64%2016-78z'%20fill='%23cfe9cf'/%3E%3Cpath%20d='M185%20195c22-16%2050-12%2066%209%2018%2024%2010%2050-12%2066-22%2016-50%208-66-12-18-24-10-50%2012-63z'%20fill='%23f7e6f1'/%3E%3Cpath%20d='M360%20160c34-26%2076-18%2098%2012%2026%2036%2016%2078-18%20102-34%2024-76%2012-98-18-26-36-16-78%2018-96z'%20fill='%2384c784'/%3E%3Cpath%20d='M80%20255c30-22%2068-16%2088%2012%2024%2032%2014%2070-16%2092-30%2022-68%2012-88-16-24-32-14-70%2016-88z'%20fill='%2388b7a0'/%3E%3Cpath%20d='M210%20285c28-20%2062-14%2080%2010%2022%2030%2012%2064-16%2084-28%2020-62%2010-80-16-22-30-12-64%2016-78z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M340%20270c30-22%2068-16%2088%2012%2024%2032%2014%2070-16%2092-30%2022-68%2012-88-16-24-32-14-70%2016-88z'%20fill='%23a7d7a7'/%3E%3Cpath%20d='M415%20255c22-16%2050-12%2066%209%2018%2024%2010%2050-12%2066-22%2016-50%208-66-12-18-24-10-50%2012-63z'%20fill='%23ffd9c9'/%3E%3Cpath%20d='M150%20370c34-26%2076-18%2098%2012%2026%2036%2016%2078-18%20102-34%2024-76%2012-98-18-26-36-16-78%2018-96z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M285%20395c28-20%2062-14%2080%2010%2022%2030%2012%2064-16%2084-28%2020-62%2010-80-16-22-30-12-64%2016-78z'%20fill='%23cfe9cf'/%3E%3Cpath%20d='M395%20375c22-16%2050-12%2066%209%2018%2024%2010%2050-12%2066-22%2016-50%208-66-12-18-24-10-50%2012-63z'%20fill='%23f7b0c8'/%3E%3C/g%3E%3C!--%20veins%20--%3E%3Cg%20opacity='0.22'%20stroke='%234c6f4c'%20stroke-width='3'%20stroke-linecap='round'%3E%3Cpath%20d='M120%20180%20C155%20160%20185%20135%20210%20110'/%3E%3Cpath%20d='M360%20230%20C390%20210%20420%20185%20445%20160'/%3E%3Cpath%20d='M150%20440%20C185%20415%20210%20395%20235%20370'/%3E%3Cpath%20d='M80%20310%20C110%20295%20135%20275%20155%20255'/%3E%3Cpath%20d='M340%20330%20C370%20310%20395%20290%20415%20255'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  animation: canopyDrift 18s ease-in-out infinite;
+  background-position:
+    0 0,
+    160px 120px,
+    -220px 90px;
+
+  background-image:
+
+    /* LAYER A - brush bushes + branches */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg opacity='.28'%3E%3Cpath d='M10 320 C120 210 210 230 320 300 C380 340 410 320 420 290' stroke='%235a7f5a' stroke-width='14' stroke-linecap='round' fill='none'/%3E%3Cpath d='M140 280 C180 250 210 220 260 180' stroke='%234c6f4c' stroke-width='10' stroke-linecap='round' fill='none'/%3E%3Cpath d='M300 300 C340 260 360 240 390 210' stroke='%234c6f4c' stroke-width='10' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='.95'%3E%3Cpath d='M90 110c38-30 85-22 108 12 26 40 14 86-24 112-38 26-85 14-108-22-26-40-14-86 24-102z' fill='%238fbf8f'/%3E%3Cpath d='M250 150c32-26 72-18 90 10 22 32 12 70-20 92-32 22-72 10-90-16-22-32-12-70 20-86z' fill='%23cfe9cf'/%3E%3Cpath d='M320 90c28-22 65-16 82 10 20 28 10 60-18 80-28 20-65 8-82-14-20-28-10-60 18-76z' fill='%23ffd9c9'/%3E%3Cpath d='M160 240c36-28 82-20 102 14 24 38 14 82-22 106-36 24-82 14-102-18-24-38-14-82 22-102z' fill='%2384c784'/%3E%3Cpath d='M280 240c40-32 90-22 112 16 28 44 16 94-26 122-40 28-90 16-112-22-28-44-16-94 26-116z' fill='%23f7e6f1'/%3E%3C/g%3E%3Cg opacity='.18' stroke='%234c6f4c' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M95 180 C135 160 165 135 195 110'/%3E%3Cpath d='M255 210 C285 190 315 170 340 150'/%3E%3Cpath d='M165 310 C195 285 215 260 240 240'/%3E%3C/g%3E%3C/svg%3E"),
+
+    /* LAYER B */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='650' height='650' viewBox='0 0 650 650'%3E%3Cg opacity='.25'%3E%3Cpath d='M40 500 C200 380 350 410 500 470 C580 510 620 480 650 440' stroke='%235a7f5a' stroke-width='18' stroke-linecap='round' fill='none'/%3E%3C/g%3E%3Cg opacity='.75'%3E%3Cpath d='M150 200c60-45 135-35 170 20 40 60 20 135-40 170-60 40-135 20-170-40-40-60-20-135 40-150z' fill='%238fbf8f'/%3E%3Cpath d='M380 260c50-40 115-30 145 18 34 50 18 115-35 145-50 34-115 18-145-32-34-50-18-115 35-131z' fill='%23ffd9c9'/%3E%3C/g%3E%3C/svg%3E"),
+
+    /* LAYER C */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900'%3E%3Cg opacity='.55'%3E%3Cpath d='M200 400c90-70 200-50 240 30 50 90 30 200-60 240-90 50-200 30-240-60-50-90-30-200 60-210z' fill='%23e6f4e6'/%3E%3C/g%3E%3C/svg%3E");
+
+  animation: canopyDrift 16s ease-in-out infinite;
 }
 
-/* Softer, larger second layer to add depth + more “connected” feel */
+/* ===== Secondary Depth Layer ===== */
 body::after{
   content:"";
   position: fixed;
@@ -300,29 +321,38 @@ body::after{
   z-index: -4;
   pointer-events: none;
 
-  opacity: var(--canopy-opacity-2);
+  opacity: var(--canopyOpacityB);
   filter: blur(1.2px) saturate(1.05);
   mix-blend-mode: multiply;
 
-  background-repeat: repeat;
-  background-size: var(--canopy-scale-2) var(--canopy-scale-2);
+  background: inherit;
+  background-size:
+    var(--canopyB) var(--canopyB),
+    var(--canopyC) var(--canopyC),
+    1100px 1100px;
 
-  /* Same tile, but it will feel different just from scale + blur */
-  background-image: inherit;
-  animation: canopySway 26s ease-in-out infinite;
+  background-position:
+    120px 200px,
+    -300px 60px,
+    300px -200px;
+
+  animation: canopySway 22s ease-in-out infinite;
 }
 
+/* ===== Movement ===== */
 @keyframes canopyDrift{
-  0%   { transform: translate(0,0); }
-  50%  { transform: translate(10px,-14px); }
-  100% { transform: translate(0,0); }
-}
-@keyframes canopySway{
-  0%   { transform: translate(0,0); }
-  50%  { transform: translate(-14px,10px); }
-  100% { transform: translate(0,0); }
+  0%   { transform: translate(0,0) rotate(0deg); }
+  35%  { transform: translate(22px,-26px) rotate(1deg); }
+  70%  { transform: translate(-18px,-12px) rotate(-0.8deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
 }
 
+@keyframes canopySway{
+  0%   { transform: translate(0,0) rotate(0deg); }
+  40%  { transform: translate(-26px,18px) rotate(-1.2deg); }
+  80%  { transform: translate(18px,26px) rotate(.9deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
 /* =========================
    Pond water layer (behind leaves)
    ========================= */
