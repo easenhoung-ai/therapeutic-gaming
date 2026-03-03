@@ -37,6 +37,7 @@ body{
     radial-gradient(900px 500px at 85% 10%, #e6f4e6 0%, rgba(230,244,230,0) 65%),
     radial-gradient(800px 500px at 50% 100%, #f3f8f3 0%, rgba(243,248,243,0) 70%),
     var(--bg);
+  background-blend-mode: soft-light;
 }
 
 .top{
@@ -254,4 +255,88 @@ input:focus,select:focus{ border-color: #c7ccff; box-shadow: 0 0 0 4px rgba(154,
 .btn:hover{
   background: var(--matcha-dark);
   transform: translateY(-2px);
+}
+
+/* =========================
+   Floating leaf decorations
+   Paste near the BOTTOM of styles.css
+   ========================= */
+
+:root{
+  --leaf-opacity: .18;        /* try .12 to .28 */
+  --leaf-blur: 0px;           /* try 1px if you want softer */
+  --leaf-saturation: 1.0;     /* try 1.05 for a little pop */
+}
+
+/* One leaf SVG (rounded, soft silhouette) */
+@supports (background: url("data:image/svg+xml,%3Csvg%20/%3E")) {
+  body{
+    position: relative; /* needed for layering */
+  }
+
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    opacity: var(--leaf-opacity);
+    filter: blur(var(--leaf-blur)) saturate(var(--leaf-saturation));
+
+    /* Scatter multiple leaves using background-images */
+    background-repeat: no-repeat;
+    background-image:
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M18%2046c10-8%2020-18%2028-30'%20stroke='%236ea86e'%20stroke-width='3'%20stroke-linecap='round'%20fill='none'%20opacity='.55'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23f7b0c8'/%3E%3Cpath%20d='M18%2046c10-8%2020-18%2028-30'%20stroke='%23e58aac'%20stroke-width='3'%20stroke-linecap='round'%20fill='none'%20opacity='.55'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23cfe9cf'/%3E%3Cpath%20d='M18%2046c10-8%2020-18%2028-30'%20stroke='%238fbf8f'%20stroke-width='3'%20stroke-linecap='round'%20fill='none'%20opacity='.5'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23ffd9c9'/%3E%3Cpath%20d='M18%2046c10-8%2020-18%2028-30'%20stroke='%23f2b39b'%20stroke-width='3'%20stroke-linecap='round'%20fill='none'%20opacity='.5'/%3E%3C/svg%3E");
+
+    /* Positions + sizes (tweak freely) */
+    background-position:
+      12% 18%,
+      82% 14%,
+      18% 78%,
+      86% 82%;
+    background-size:
+      110px 110px,
+      140px 140px,
+      120px 120px,
+      160px 160px;
+
+    /* Gentle drift */
+    animation: leafDrift 12s ease-in-out infinite;
+  }
+
+  /* A second layer: fewer, larger leaves for depth */
+  body::after{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    opacity: calc(var(--leaf-opacity) * .7);
+    filter: blur(1px) saturate(1.05);
+
+    background-repeat: no-repeat;
+    background-image:
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23e6f4e6'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C39%209%2022%2018%2013%2032c-9%2014-5%2025%202%2032%207%207%2018%2011%2032%202%2014-9%2024-29%2020-43-2-6-6-10-13-11z'%20fill='%23f7e6f1'/%3E%3C/svg%3E");
+    background-position: 55% 8%, 40% 92%;
+    background-size: 220px 220px, 260px 260px;
+
+    animation: leafSway 16s ease-in-out infinite;
+  }
+
+  @keyframes leafDrift{
+    0%   { transform: translateY(0px) translateX(0px); }
+    50%  { transform: translateY(-10px) translateX(6px); }
+    100% { transform: translateY(0px) translateX(0px); }
+  }
+
+  @keyframes leafSway{
+    0%   { transform: translateY(0px) translateX(0px); }
+    50%  { transform: translateY(8px) translateX(-8px); }
+    100% { transform: translateY(0px) translateX(0px); }
+  }
 }
