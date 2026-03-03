@@ -469,16 +469,17 @@ html .koi-layer {
 
 .koi{
   position: absolute;
+  left: 0; /* anchor fish to left edge */
   width: var(--koiSize, 140px);
   opacity: var(--koiOpacity, .55);
+  will-change: transform;
 
-  /* 3 animations at once: swim, bob, and “depth pulse” */
+  /* 3 animations at once */
   animation:
     swimRight var(--koiDur, 55s) linear infinite,
     bob var(--bobDur, 5.5s) ease-in-out infinite,
     depthPulse var(--depthDur, 12s) ease-in-out infinite;
 
-  transform: translateX(-30vw); /* start off-screen */
   filter: blur(var(--koiBlur, 0px)) saturate(1.05);
 }
 
