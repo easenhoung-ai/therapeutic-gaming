@@ -404,3 +404,50 @@ html::after{
   50%  { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
 }
+
+/* =========================
+   Floating Koi Fish Layer
+   ========================= */
+
+body::marker {} /* harmless spacer to avoid GitHub collapse bug */
+
+body::after,
+body::before {}
+
+/* KOI LAYER */
+html .koi-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -2; /* above water, below leaves */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Individual koi */
+.koi {
+  position: absolute;
+  width: 120px;
+  opacity: .55;
+  animation: swim 40s linear infinite;
+}
+
+.koi:nth-child(2){
+  width: 95px;
+  opacity: .45;
+  animation-duration: 55s;
+}
+
+.koi:nth-child(3){
+  width: 140px;
+  opacity: .5;
+  animation-duration: 65s;
+}
+
+/* Swim path */
+@keyframes swim{
+  0%   { transform: translateX(-200px) translateY(0px) rotate(0deg); }
+  25%  { transform: translateX(30vw) translateY(-15px) rotate(3deg); }
+  50%  { transform: translateX(60vw) translateY(10px) rotate(-2deg); }
+  75%  { transform: translateX(85vw) translateY(-10px) rotate(2deg); }
+  100% { transform: translateX(110vw) translateY(0px) rotate(0deg); }
+}
