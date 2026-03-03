@@ -258,100 +258,67 @@ input:focus,select:focus{ border-color: #c7ccff; box-shadow: 0 0 0 4px rgba(154,
 }
 
 /* =========================
-   Brushy floating leaves (more, with veins) + soft brush strokes
-   Replace your previous leaf snippet with this one
+   Leaf canopy background (tons of leaves + faint branches)
+   Paste at BOTTOM of styles.css
    ========================= */
 
 :root{
-  --leaf-opacity: .22;     /* .18–.30 */
-  --leaf-blur: 0.4px;      /* 0–1.2px */
+  --canopy-opacity: .18;      /* .12–.26 */
+  --canopy-opacity-2: .10;    /* .06–.16 */
+  --canopy-scale: 520px;      /* smaller = denser (try 420px) */
+  --canopy-scale-2: 760px;    /* second layer size */
 }
 
+/* IMPORTANT: This assumes you do NOT have any other body::before / body::after decorations */
 body{ position: relative; }
 
-/* Layer 1: many small/medium brush leaves */
+/* Dense repeating leaf layer */
 body::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  opacity: var(--leaf-opacity);
-  filter: blur(var(--leaf-blur)) saturate(1.05);
-
-  background-repeat: no-repeat;
-
-  /* Brushy leaf SVG (rounded, painted edge, extra veins) */
-  background-image:
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%236ea86e'%20stroke-width='3.2'%20stroke-linecap='round'%20fill='none'%20opacity='.55'/%3E%3Cpath%20d='M26%2045c2-4%206-8%2011-13'%20stroke='%236ea86e'%20stroke-width='2.4'%20stroke-linecap='round'%20opacity='.4'/%3E%3Cpath%20d='M29%2051c2-4%205-7%209-10'%20stroke='%236ea86e'%20stroke-width='2.2'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M21%2038c2-3%207-7%2014-13'%20stroke='%236ea86e'%20stroke-width='2.2'%20stroke-linecap='round'%20opacity='.3'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23f7b0c8'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%23e58aac'%20stroke-width='3.2'%20stroke-linecap='round'%20fill='none'%20opacity='.55'/%3E%3Cpath%20d='M26%2045c2-4%206-8%2011-13'%20stroke='%23e58aac'%20stroke-width='2.4'%20stroke-linecap='round'%20opacity='.4'/%3E%3Cpath%20d='M29%2051c2-4%205-7%209-10'%20stroke='%23e58aac'%20stroke-width='2.2'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M21%2038c2-3%207-7%2014-13'%20stroke='%23e58aac'%20stroke-width='2.2'%20stroke-linecap='round'%20opacity='.3'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23cfe9cf'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%238fbf8f'%20stroke-width='3.1'%20stroke-linecap='round'%20fill='none'%20opacity='.5'/%3E%3Cpath%20d='M26%2045c2-4%206-8%2011-13'%20stroke='%238fbf8f'%20stroke-width='2.3'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M29%2051c2-4%205-7%209-10'%20stroke='%238fbf8f'%20stroke-width='2.1'%20stroke-linecap='round'%20opacity='.3'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23ffd9c9'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%23f2b39b'%20stroke-width='3.1'%20stroke-linecap='round'%20fill='none'%20opacity='.5'/%3E%3Cpath%20d='M26%2045c2-4%206-8%2011-13'%20stroke='%23f2b39b'%20stroke-width='2.3'%20stroke-linecap='round'%20opacity='.33'/%3E%3Cpath%20d='M29%2051c2-4%205-7%209-10'%20stroke='%23f2b39b'%20stroke-width='2.1'%20stroke-linecap='round'%20opacity='.28'/%3E%3C/svg%3E");
-
-  /* More leaves: positions */
-  background-position:
-    10% 14%,
-    86% 12%,
-    18% 70%,
-    90% 78%;
-  /* Sizes */
-  background-size:
-    130px 130px,
-    150px 150px,
-    120px 120px,
-    170px 170px;
-
-  animation: leafDrift 11s ease-in-out infinite;
-}
-
-/* Layer 2: add MORE leaves with different orientation + optional brush strokes */
-body::after{
   content:"";
   position: fixed;
   inset: 0;
   z-index: -3;
   pointer-events: none;
-  opacity: .16;
-  filter: blur(0.8px) saturate(1.05);
 
-  background-repeat: no-repeat;
+  opacity: var(--canopy-opacity);
+  filter: blur(.35px) saturate(1.08);
+  mix-blend-mode: multiply;
 
-  /* A few rotated leaves (same silhouette, rotated via SVG transform) + brush strokes */
-  background-image:
-    /* Rotated matcha leaf */
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cg%20transform='rotate(-25%2032%2032)'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23e6f4e6'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%238fbf8f'%20stroke-width='3'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M24%2042c3-4%207-7%2012-12'%20stroke='%238fbf8f'%20stroke-width='2'%20stroke-linecap='round'%20opacity='.25'/%3E%3C/g%3E%3C/svg%3E"),
-    /* Rotated blush leaf */
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cg%20transform='rotate(18%2032%2032)'%3E%3Cpath%20d='M52%2012C40%209%2025%2017%2016%2030%207%2043%209%2056%2022%2060c13%204%2028-4%2034-18%206-14%204-26-4-30z'%20fill='%23f7e6f1'/%3E%3Cpath%20d='M18%2048c10-7%2020-18%2028-32'%20stroke='%23e58aac'%20stroke-width='3'%20stroke-linecap='round'%20opacity='.35'/%3E%3Cpath%20d='M24%2042c3-4%207-7%2012-12'%20stroke='%23e58aac'%20stroke-width='2'%20stroke-linecap='round'%20opacity='.25'/%3E%3C/g%3E%3C/svg%3E"),
+  background-repeat: repeat;
+  background-size: var(--canopy-scale) var(--canopy-scale);
 
-    /* Brush stroke connector 1 */
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20180'%3E%3Cpath%20d='M10%20110%20C70%2020%20150%2020%20290%20130'%20stroke='%238fbf8f'%20stroke-width='16'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.25'/%3E%3Cpath%20d='M10%20110%20C70%2020%20150%2020%20290%20130'%20stroke='%23f7b0c8'%20stroke-width='9'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.18'/%3E%3C/svg%3E"),
-    /* Brush stroke connector 2 */
-    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20180'%3E%3Cpath%20d='M20%2050%20C120%20160%20190%20140%20280%2070'%20stroke='%23f7b0c8'%20stroke-width='14'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.20'/%3E%3Cpath%20d='M20%2050%20C120%20160%20190%20140%20280%2070'%20stroke='%238fbf8f'%20stroke-width='8'%20stroke-linecap='round'%20stroke-linejoin='round'%20opacity='.16'/%3E%3C/svg%3E");
-
-  background-position:
-    42% 10%,
-    64% 88%,
-    6% 32%,
-    55% 58%;
-
-  background-size:
-    220px 220px,
-    200px 200px,
-    520px 320px,
-    480px 300px;
-
-  animation: leafSway 16s ease-in-out infinite;
+  /* Brushy leaf canopy tile with faint branches */
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='520'%20height='520'%20viewBox='0%200%20520%20520'%3E%3Cdefs%3E%3Cfilter%20id='soft'%3E%3CfeGaussianBlur%20stdDeviation='0.35'/%3E%3C/filter%3E%3C/defs%3E%3Crect%20width='520'%20height='520'%20fill='transparent'/%3E%3C!--%20branches%20--%3E%3Cg%20opacity='0.23'%3E%3Cpath%20d='M30%20370%20C130%20260%20220%20270%20320%20340%20C400%20395%20470%20370%20490%20340'%20stroke='%236b8f6b'%20stroke-width='14'%20stroke-linecap='round'%20fill='none'/%3E%3Cpath%20d='M85%20325%20C140%20270%20190%20240%20260%20210'%20stroke='%235b7d5b'%20stroke-width='10'%20stroke-linecap='round'%20fill='none'/%3E%3Cpath%20d='M300%20335%20C360%20310%20410%20270%20460%20220'%20stroke='%235b7d5b'%20stroke-width='10'%20stroke-linecap='round'%20fill='none'/%3E%3C/g%3E%3C!--%20leaf%20stamps%20(matcha/blush/mint)%20--%3E%3Cg%20filter='url(%23soft)'%3E%3Cg%20opacity='0.95'%3E%3Cpath%20d='M120%20110c34-26%2076-18%2098%2012%2026%2036%2016%2078-18%20102-34%2024-76%2012-98-18-26-36-16-78%2018-96z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M245%20140c28-20%2062-14%2080%2010%2022%2030%2012%2064-16%2084-28%2020-62%2010-80-16-22-30-12-64%2016-78z'%20fill='%23cfe9cf'/%3E%3Cpath%20d='M185%20195c22-16%2050-12%2066%209%2018%2024%2010%2050-12%2066-22%2016-50%208-66-12-18-24-10-50%2012-63z'%20fill='%23f7e6f1'/%3E%3Cpath%20d='M360%20160c34-26%2076-18%2098%2012%2026%2036%2016%2078-18%20102-34%2024-76%2012-98-18-26-36-16-78%2018-96z'%20fill='%2384c784'/%3E%3Cpath%20d='M80%20255c30-22%2068-16%2088%2012%2024%2032%2014%2070-16%2092-30%2022-68%2012-88-16-24-32-14-70%2016-88z'%20fill='%2388b7a0'/%3E%3Cpath%20d='M210%20285c28-20%2062-14%2080%2010%2022%2030%2012%2064-16%2084-28%2020-62%2010-80-16-22-30-12-64%2016-78z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M340%20270c30-22%2068-16%2088%2012%2024%2032%2014%2070-16%2092-30%2022-68%2012-88-16-24-32-14-70%2016-88z'%20fill='%23a7d7a7'/%3E%3Cpath%20d='M415%20255c22-16%2050-12%2066%209%2018%2024%2010%2050-12%2066-22%2016-50%208-66-12-18-24-10-50%2012-63z'%20fill='%23ffd9c9'/%3E%3Cpath%20d='M150%20370c34-26%2076-18%2098%2012%2026%2036%2016%2078-18%20102-34%2024-76%2012-98-18-26-36-16-78%2018-96z'%20fill='%238fbf8f'/%3E%3Cpath%20d='M285%20395c28-20%2062-14%2080%2010%2022%2030%2012%2064-16%2084-28%2020-62%2010-80-16-22-30-12-64%2016-78z'%20fill='%23cfe9cf'/%3E%3Cpath%20d='M395%20375c22-16%2050-12%2066%209%2018%2024%2010%2050-12%2066-22%2016-50%208-66-12-18-24-10-50%2012-63z'%20fill='%23f7b0c8'/%3E%3C/g%3E%3C!--%20veins%20--%3E%3Cg%20opacity='0.22'%20stroke='%234c6f4c'%20stroke-width='3'%20stroke-linecap='round'%3E%3Cpath%20d='M120%20180%20C155%20160%20185%20135%20210%20110'/%3E%3Cpath%20d='M360%20230%20C390%20210%20420%20185%20445%20160'/%3E%3Cpath%20d='M150%20440%20C185%20415%20210%20395%20235%20370'/%3E%3Cpath%20d='M80%20310%20C110%20295%20135%20275%20155%20255'/%3E%3Cpath%20d='M340%20330%20C370%20310%20395%20290%20415%20255'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  animation: canopyDrift 18s ease-in-out infinite;
 }
 
-@keyframes leafDrift{
-  0%   { transform: translateY(0px) translateX(0px); }
-  50%  { transform: translateY(-12px) translateX(7px); }
-  100% { transform: translateY(0px) translateX(0px); }
+/* Softer, larger second layer to add depth + more “connected” feel */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+  pointer-events: none;
+
+  opacity: var(--canopy-opacity-2);
+  filter: blur(1.2px) saturate(1.05);
+  mix-blend-mode: multiply;
+
+  background-repeat: repeat;
+  background-size: var(--canopy-scale-2) var(--canopy-scale-2);
+
+  /* Same tile, but it will feel different just from scale + blur */
+  background-image: inherit;
+  animation: canopySway 26s ease-in-out infinite;
 }
 
-@keyframes leafSway{
-  0%   { transform: translateY(0px) translateX(0px); }
-  50%  { transform: translateY(10px) translateX(-10px); }
-  100% { transform: translateY(0px) translateX(0px); }
+@keyframes canopyDrift{
+  0%   { transform: translate(0,0); }
+  50%  { transform: translate(10px,-14px); }
+  100% { transform: translate(0,0); }
 }
+@keyframes canopySway{
+  0%   { transform: translate(0,0); }
+  50%  { transform: translate(-14px,10px); }
+  100% { transform: translate(0,0); }
 }
