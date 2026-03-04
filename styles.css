@@ -1,6 +1,6 @@
-/* Cute, clean, mobile-first */
+
 :root{
-  /* Soft Matcha Pediatric Palette */
+  /* Soft Matcha Palette */
   --bg:#f4f8f2;
   --card:#ffffff;
   --ink:#2a2f2a;
@@ -258,8 +258,7 @@ input:focus,select:focus{ border-color: #c7ccff; box-shadow: 0 0 0 4px rgba(154,
 }
 
 /* =========================
-   Dense Brush Bush Canopy
-   Multi-layer, offset, connected branches
+   Dense Brush Bush 
    ========================= */
 
 :root{
@@ -371,7 +370,7 @@ html::before{
     linear-gradient(180deg, #f2fbf6 0%, #eef8f1 55%, #f4f8f2 100%);
 }
 
-/* subtle shimmer movement */
+/*  shimmer movement */
 @keyframes waterDrift{
   0%   { transform: translate(0,0); }
   50%  { transform: translate(8px,-10px); }
@@ -406,10 +405,10 @@ html::after{
 }
 
 /* =========================
-   Floating Koi Fish Layer
+   Floating Fish Layer
    ========================= */
 
-body::marker {} /* harmless spacer to avoid GitHub collapse bug */
+body::marker {} /*  spacer to avoid collapse*/
 
 body::after,
 body::before {}
@@ -453,7 +452,7 @@ html .koi-layer {
 }
 
 /* =========================
-   KOI FISH (slow swim + tail flick + depth + sparkles + parallax)
+   koi? FISH ? idk
    ========================= */
 
 .koi-layer{
@@ -556,7 +555,6 @@ html .koi-layer {
   75%          { opacity: .10; }
 }
 
-/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){
   .koi{ animation: none; }
   .koi-layer{ transform: none; }
