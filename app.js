@@ -227,7 +227,6 @@ init();
 
 // =========================
 // KOI: randomize + mouse parallax
-// Paste at bottom of app.js
 // =========================
 (function koiInit(){
   const layer = document.getElementById("koiLayer");
